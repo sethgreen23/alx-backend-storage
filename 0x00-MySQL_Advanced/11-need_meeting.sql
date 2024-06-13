@@ -5,4 +5,4 @@
 CREATE VIEW need_meeting AS
 SELECT * FROM students
 WHERE score < 80 AND
-(last_meeting IS NULL OR last_meeting < NOW() - INTERVAL '1 month'); 
+(last_meeting IS NULL OR last_meeting < DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)); 
