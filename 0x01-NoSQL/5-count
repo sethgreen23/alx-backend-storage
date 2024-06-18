@@ -1,2 +1,2 @@
 // count the number of documents in the school collection
-db.school.aggregate([{$group: { _id: null, count: {$sum: 1}}}])
+db.school.count()
