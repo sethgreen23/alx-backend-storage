@@ -10,6 +10,7 @@ from functools import wraps
 
 class Cache:
     """ Cache class"""
+
     def __init__(self) -> None:
         """ Init method """
         self._redis = redis.Redis()
@@ -18,6 +19,5 @@ class Cache:
     def store(self, data: Union[str, bytes, int]) -> str:
         """ Store method """
         key = str(uuid4())
-        data = data.decode('utf-8')
         self._redis.set(key, data)
         return key
