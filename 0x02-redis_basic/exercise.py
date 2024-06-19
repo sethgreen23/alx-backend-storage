@@ -11,6 +11,7 @@ from functools import wraps
 class Cache:
     """ Cache class"""
     def __init__(self):
+        """ Init method """
         self._redis = redis.Redis()
         self._redis.flushdb()
 
