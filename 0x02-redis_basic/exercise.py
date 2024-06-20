@@ -31,6 +31,26 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
+def replay(method: Callable) -> None:
+    """Replay method"""
+    r = redis.Redis()
+    method_name = method.__qualname__
+    call_time = int(r.get(method_name))
+    output_l_n = r.lrange(f'{method_name}:outputs', 0, -1)
+    input_l_n = r.lrange(f'{method_name}:inputs', 0, -1)
+    print(f'{method_name} was called {call_time} times:')
+    output_index = 0
+    input_index = 0
+    while output_index < len(output_l_n) and input_index < len(input_l_n):
+        output_value = output_l_n[output_index]
+        input_value = input_l_n[input_index]
+        input_index += 1
+        output_index += 1
+        left = f'{method_name}((*{input_value.decode("utf-8")})'
+        right = f'{output_value.decode("utf-8")})'
+        print(f'{left} -> {right}')
+
+
 class Cache:
     """ Cache class"""
 
