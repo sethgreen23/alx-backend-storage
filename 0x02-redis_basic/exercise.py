@@ -8,13 +8,13 @@ from typing import Callable, Union
 from functools import wraps
 
 
-def count_calls(fn: Callable) -> Callable:
+def count_calls(method: Callable) -> Callable:
     """ Count Cache class method calls"""
-    @wraps(fn)
+    @wraps(method)
     def wrapper(self, *args, **kwargs):
         """ Wrapper function """
-        key = fn(self, *args, **kwargs)
-        self._redis.incr(fn.__qualname__)
+        key = method(self, *args, **kwargs)
+        self._redis.incr(f'{method.__qualname__}')
         return key
     return wrapper
 
