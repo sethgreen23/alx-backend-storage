@@ -46,7 +46,7 @@ def replay(method: Callable) -> None:
         input_value = input_l_n[input_index]
         input_index += 1
         output_index += 1
-        left = f'{method_name}((*{input_value.decode("utf-8")})'
+        left = f'{method_name}(*{input_value.decode("utf-8")})'
         right = f'{output_value.decode("utf-8")})'
         print(f'{left} -> {right}')
 
