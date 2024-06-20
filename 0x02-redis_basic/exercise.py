@@ -11,7 +11,7 @@ from functools import wraps
 def count_calls(fn: Callable) -> Callable:
     """ Count Cache class method calls"""
     @wraps(fn)
-    def wrapper(self, *args, **kwargs):
+    def wrapper(self, *args: object, **kwargs: object) -> Callable:
         """ Wrapper function """
         self._redis.incr(f'{fn.__qualname__}')
         return fn(self, *args, **kwargs)
