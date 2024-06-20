@@ -18,6 +18,7 @@ def count_calls(method: Callable) -> Callable:
         return key
     return wrapper
 
+
 def call_history(method: Callable) -> Callable:
     """ Call history method"""
     @wraps(method)
