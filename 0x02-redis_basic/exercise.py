@@ -19,6 +19,20 @@ class Cache:
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """ Store method """
         key = str(uuid4())
-        data = data.decode('utf-8')
         self._redis.set(key, data)
         return key
+
+    def get(self, key: str,
+            fn: Callable = None) -> Union[str, bytes, int, float]:
+        """ Get method"""
+        if fn is None:
+            return self._redis.get(key)
+        return fn(self._redis.get(key))
+
+    def get_str(self, key: str) -> str:
+        """Get string method"""
+        return str(key)
+
+    def get_int(self, key: str) -> int:
+        """Get int method"""
+        return int(key)
