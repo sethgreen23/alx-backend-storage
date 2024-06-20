@@ -7,7 +7,7 @@ from functools import wraps
 from typing import Callable
 
 
-def track_url(method: Callable) -> str:
+def track_url(method: Callable) -> Callable:
     """Track URL"""
 
     @wraps(method)
