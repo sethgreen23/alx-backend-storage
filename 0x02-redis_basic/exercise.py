@@ -41,7 +41,7 @@ def replay(method: Callable) -> None:
     print(f'{method_name} was called {call_time} times:')
     output_index = 0
     input_index = 0
-    while output_index < len(output_l_n) and input_index < len(input_l_n):
+    while output_index < len(output_l_n) or input_index < len(input_l_n):
         output_value = output_l_n[output_index]
         input_value = input_l_n[input_index]
         input_index += 1
